@@ -15,6 +15,7 @@ class SearchCityScreen extends StatefulWidget{
 class _SearchCityScreenState extends State<SearchCityScreen>{
 
   Color colorScheme;
+  String cityName;
   @override
   void initState() {
     super.initState();
@@ -34,14 +35,32 @@ class _SearchCityScreenState extends State<SearchCityScreen>{
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              TextField(
-                style: TextStyle(
-                  color: Colors.black,
+              Expanded(
+                child: TextField(
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                  decoration: kInputTextFieldDecoration,
+                  onChanged: (value){
+                    cityName = value;
+                  },
                 ),
-                decoration: kInputTextFieldDecoration,
-                onChanged: (value){
-
-                },
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                child: RaisedButton(
+                  padding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 20.0),
+                  color: colorScheme,
+                  shape: buttonShape,
+                  splashColor: Colors.grey,
+                  child: Text(
+                    "Get Weather",
+                    style: buttonTextStyle,
+                  ),
+                  onPressed: (){
+                    Navigator.pop(context,cityName);
+                  },
+                ),
               ),
             ],
           ),

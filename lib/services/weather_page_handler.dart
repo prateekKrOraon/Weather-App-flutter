@@ -9,20 +9,28 @@ const apiKey = 'bb68b56c3023b65ec93ad9d5278769fe';
 
 class WeatherPageHandler{
 
-  Future<dynamic> getLocationWeather() async {
-    Location location = Location();
+  Future<dynamic> getCityWeather(String cityName) async {
 
-    await location.getCurrentLocation();
-
-    NetworkHelper networkHelper = NetworkHelper(
-        url:'$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric'
-    );
+    var url = '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=metric';
+    NetworkHelper networkHelper = NetworkHelper(url: url);
 
     var weatherData = await networkHelper.getData();
 
     return weatherData;
   }
 
+  Future<dynamic> getLocationWeather() async {
+
+    Location location = Location();
+    await location.getCurrentLocation();
+
+    var url = '$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric';
+    NetworkHelper networkHelper = NetworkHelper(url:url);
+
+    var weatherData = await networkHelper.getData();
+
+    return weatherData;
+  }
 
   String temperature;
   String cityName;
@@ -43,7 +51,8 @@ class WeatherPageHandler{
   void setData(dynamic weatherData){
 
     id = weatherData['weather'][0]['id'];
-    temperature = "${weatherData['main']['temp'].toString()} °C";
+    var temp = weatherData['main']['temp'];
+    temperature = "${temp.round().toString()} °C";
     cityName = weatherData['name'];
     countryCode = weatherData['sys']['country'];
     day = dayHandler(now.weekday);
@@ -55,7 +64,6 @@ class WeatherPageHandler{
     maxTemp = "${weatherData['main']['temp_max']} °C";
     colorScheme = colorSchemeHandler();
     windSpeed = "${weatherData['wind']['speed']} m/s";
-    print(weatherData);
 
   }
 

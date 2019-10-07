@@ -30,6 +30,7 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
   String humidity;
   String visibility;
   String feelsLike;
+  String buttonText = 'Refresh Data';
 
   WeatherPageHandler curWeather = WeatherPageHandler();
 
@@ -119,7 +120,7 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Refresh Data",
+                        buttonText,
                         style: textStyle.copyWith(
                           fontSize: 23.0,
                           color: Colors.white,
@@ -129,6 +130,7 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                     onPressed: () async {
                       var weather = await curWeather.getLocationWeather();
                       updateUI(weather);
+                      buttonText = 'Refresh Data';
                     },
                   ),
                 ],
@@ -178,13 +180,18 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                         ),
                       ),
                       onPressed: () async {
-                        Navigator.push(
+                        var citySearched = await Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SearchCityScreen(
                               colorScheme: colorScheme
                             ),
                           ),
-                        );
+                        );//Navigator
+                        if(citySearched != null){
+                          var weather =  await curWeather.getCityWeather(citySearched);
+                          buttonText = 'Get Current Location';
+                          updateUI(weather);
+                        }
                       },
                     ),
                   ),//wind, humidity and feels ike
