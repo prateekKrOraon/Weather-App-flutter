@@ -7,4 +7,4 @@ A flutter app to get current weather of any location
 
 ## Weather API
 
- - [openweathermap.org]OpenWeatherMap
+ - [OpenWeatherMap](www.openweathermap.org)
