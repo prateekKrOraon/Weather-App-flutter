@@ -49,7 +49,7 @@ class WeatherPageHandler{
     day = dayHandler(now.weekday);
     time = timeHandler(now.hour,now.minute);
     icon = iconHandler(id);
-    description = weatherData['weather'][0]['main'].toString();
+    description = weatherData['weather'][0]['description'].toString();
     humidity = "${weatherData['main']['humidity']} %";
     visibility = "${weatherData['visibility']} m";
     maxTemp = "${weatherData['main']['temp_max']} °C";
@@ -117,7 +117,7 @@ class WeatherPageHandler{
       }else if(id<700){
         icon = WeatherIcons.night_alt_snow;
       }else if(id<800){
-        icon = WeatherIcons.night_cloudy;
+        icon = WeatherIcons.night_alt_cloudy;
       }else if(id>800 && id<900){
         icon = WeatherIcons.night_alt_cloudy;
       }else if(id == 800){

@@ -4,6 +4,7 @@ import 'package:weather_icons/weather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/weather_page_handler.dart';
+import 'package:weather_app/utilities/bottom_row_tile.dart';
 
 class WeatherReportPage extends StatefulWidget{
 
@@ -146,71 +147,20 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: <Widget>[
-                            Icon(WeatherIcons.wind_direction),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              "Wind",
-                              style: bottomRowTextStyle,
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Text(
-                              curWeather.windSpeed,
-                              style: bottomRowValueStyle,
-                            ),
-                          ],
-                        ),
+                      BottomRowTile(
+                        icon: WeatherIcons.wind_direction,
+                        title: "Wind",
+                        value: curWeather.windSpeed,
                       ),//wind speed
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: <Widget>[
-                            Icon(WeatherIcons.humidity),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              "Humidity",
-                              style: bottomRowTextStyle,
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Text(
-                              curWeather.humidity,
-                              style: bottomRowValueStyle,
-                            ),
-                          ],
-                        ),
+                      BottomRowTile(
+                        icon: WeatherIcons.humidity,
+                        title: "Humidity",
+                        value: curWeather.humidity,
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: <Widget>[
-                            Icon(WeatherIcons.thermometer),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Text(
-                              "Feels Like",
-                              style: bottomRowTextStyle,
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Text(
-                              curWeather.maxTemp,
-                              style: bottomRowValueStyle,
-                            ),
-                          ],
-                        ),
+                      BottomRowTile(
+                        icon: WeatherIcons.thermometer,
+                        title: "Feels Like",
+                        value: curWeather.maxTemp,
                       ),
                     ],
                   ),
