@@ -9,6 +9,8 @@ const apiKey = 'bb68b56c3023b65ec93ad9d5278769fe';
 
 class WeatherPageHandler{
 
+  String currentTimeZone;
+
   Future<dynamic> getCityWeather(String cityName) async {
 
     var url = '$openWeatherMapURL?q=$cityName&appid=$apiKey&units=metric';
@@ -28,6 +30,9 @@ class WeatherPageHandler{
     NetworkHelper networkHelper = NetworkHelper(url:url);
 
     var weatherData = await networkHelper.getData();
+
+    currentTimeZone = weatherData['timezone'].toString();
+    print("timezone = $currentTimeZone");
 
     return weatherData;
   }
@@ -64,6 +69,7 @@ class WeatherPageHandler{
     maxTemp = "${weatherData['main']['temp_max']} °C";
     colorScheme = colorSchemeHandler();
     windSpeed = "${weatherData['wind']['speed']} m/s";
+    print(description[0].toUpperCase()+description.substring(1));
 
   }
 

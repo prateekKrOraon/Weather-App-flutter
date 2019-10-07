@@ -35,16 +35,14 @@ class _SearchCityScreenState extends State<SearchCityScreen>{
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: <Widget>[
-              Expanded(
-                child: TextField(
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                  decoration: kInputTextFieldDecoration,
-                  onChanged: (value){
-                    cityName = value;
-                  },
+              TextField(
+                style: TextStyle(
+                  color: Colors.black,
                 ),
+                decoration: kInputTextFieldDecoration,
+                onChanged: (value){
+                  cityName = value;
+                },
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
