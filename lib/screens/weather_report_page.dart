@@ -1,3 +1,5 @@
+import 'package:weather_app/screens/search_city_screen.dart';
+import 'package:weather_app/utilities/constants.dart';
 import 'package:weather_icons/weather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,26 +68,22 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Column(
                 children: <Widget>[
                   Text(
                     "${curWeather.cityName}, ${curWeather.countryCode}",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
+                    style: textStyle.copyWith(
                       fontSize: 50.0,
-                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   Text(
                     "${curWeather.day}, ${curWeather.time}",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
+                    style: textStyle.copyWith(
                       fontSize: 23.0,
-                      fontWeight: FontWeight.normal,
-                    ),
+                    )
                   ),
                 ],
               ),//City name, country code, day and time
@@ -97,18 +95,14 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                 children: <Widget>[
                   Text(
                     curWeather.temperature,
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
+                    style: textStyle.copyWith(
                       fontSize: 100.0,
-                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   Text(
                     curWeather.description,
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
+                    style: textStyle.copyWith(
                       fontSize: 23.0,
-                      fontWeight: FontWeight.normal,
                     ),
                   ),
                   SizedBox(height: 20.0,),
@@ -119,17 +113,15 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                         side: BorderSide(
                           width: 1.0,
                           color: Colors.white,
-                        )
+                        ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Refresh Data",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Montserrat',
+                        style: textStyle.copyWith(
                           fontSize: 23.0,
-                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -164,22 +156,14 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                             ),
                             Text(
                               "Wind",
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.normal,
-                              ),
+                              style: bottomRowTextStyle,
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
                             Text(
                               curWeather.windSpeed,
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: bottomRowValueStyle,
                             ),
                           ],
                         ),
@@ -194,22 +178,14 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                             ),
                             Text(
                               "Humidity",
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.normal,
-                              ),
+                              style: bottomRowTextStyle,
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
                             Text(
                               curWeather.humidity,
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: bottomRowValueStyle,
                             ),
                           ],
                         ),
@@ -224,27 +200,43 @@ class _WeatherReportPageState extends State<WeatherReportPage>{
                             ),
                             Text(
                               "Feels Like",
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.normal,
-                              ),
+                              style: bottomRowTextStyle,
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
                             Text(
                               curWeather.maxTemp,
-                              style: TextStyle(
-                                fontFamily: 'Montserrat',
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: bottomRowValueStyle,
                             ),
                           ],
                         ),
                       ),
                     ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+                    child: RaisedButton(
+                      color: colorScheme,
+                      splashColor: Colors.grey,
+                      shape: buttonShape,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Different City?",
+                          style: buttonTextStyle
+                        ),
+                      ),
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SearchCityScreen(
+                              colorScheme: colorScheme
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),//wind, humidity and feels ike
                 ],
               ),

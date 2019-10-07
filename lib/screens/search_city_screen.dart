@@ -1,19 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/services/weather_page_handler.dart';
+import 'package:weather_app/utilities/constants.dart';
 
 class SearchCityScreen extends StatefulWidget{
+
+  SearchCityScreen({this.colorScheme});
+
+  final Color colorScheme;
+
   @override
   _SearchCityScreenState createState() => _SearchCityScreenState();
 
 }
 
 class _SearchCityScreenState extends State<SearchCityScreen>{
+
+  Color colorScheme;
+  @override
+  void initState() {
+    super.initState();
+    this.colorScheme = widget.colorScheme;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: colorScheme,
       appBar: AppBar(
         title: Text("Search"),
-        //backgroundColor: ,
+        backgroundColor: colorScheme,
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+                decoration: kInputTextFieldDecoration,
+                onChanged: (value){
+
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
